@@ -84,17 +84,29 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
-/*!**********************************!*\
-  !*** multi ./resouce/js/back.js ***!
-  \**********************************/
+/******/ ({
+
+/***/ "./resources/js/back.js":
+/*!******************************!*\
+  !*** ./resources/js/back.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+alert('back js');
+
+/***/ }),
+
+/***/ 1:
+/*!************************************!*\
+  !*** multi ./resources/js/back.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'C:\\Users\\Ilaria\\bool\\Esercizi\\laravel_esercizi\\laravel-boolpress\\resouce\\js\\back.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+module.exports = __webpack_require__(/*! C:\Users\Ilaria\bool\Esercizi\laravel_esercizi\laravel-boolpress\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })
-/******/ ]);
+
+/******/ });
