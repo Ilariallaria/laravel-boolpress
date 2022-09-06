@@ -17,8 +17,8 @@ class PostTableSeeder extends Seeder
         for($i = 0; $i< 5; $i++){
             $new_post = new Post();
             $new_post->title = ucfirst($faker->words(rand(3, 7), true));
-            $new_post->content = $faker->paragraphs(rand(1, 3), true);
-            $new_post->slug = Str::slug('title', '-');
+            $new_post->content = $faker->paragraphs(rand(5, 10), true);
+            $new_post->slug = Str::slug($new_post->title, '-');
             $new_post->save();
         }
     }
