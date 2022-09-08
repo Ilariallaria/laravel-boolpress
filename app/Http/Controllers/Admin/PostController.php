@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -70,9 +71,18 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+        
+        // data odierna
+        // $now = Carbon::now();
+
+        // metodo preso dalla doc, restituisce il tempo trascorso tra
+        // la data che gli dici tu (creazione post) e la data odierna
+        // esplicitato human friendly
+        $diff_date = $post->created_at->diffForHumans();
 
         $data = [
-            'post' => $post
+            'post' => $post,
+            'diff_date' => $diff_date
         ];
         return view ('admin.posts.show', $data);
     }

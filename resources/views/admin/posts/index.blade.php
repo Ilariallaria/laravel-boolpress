@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1>Posts list</h1>
+  <h1>Posts list</h1>
 
   @if ($show_deleted_message === 'yes')
     <div class="alert alert-primary" role="alert">
