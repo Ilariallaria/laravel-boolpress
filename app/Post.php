@@ -11,4 +11,9 @@ class Post extends Model
         'content',
         'slug'
     ];
+
+    // metodo che applicato mi torna un elemento che appartiene alla tabella categories
+    public function category(){
+        return $this->belongsTo('App\Category');
+    }
 }

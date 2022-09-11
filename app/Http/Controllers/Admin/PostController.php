@@ -71,7 +71,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        
+        // dd($post->category);
         // data odierna
         // $now = Carbon::now();
 
