@@ -18,6 +18,8 @@
             <textarea class="form-control" id="content" name="content" rows="5">{{ old('content', $post->content) }}</textarea>
         </div>
 
-        <input type="submit" class="btn btn-success" value="Save">
+        {{-- <input type="submit" class="btn btn-success" value="Save"> --}}
+        <button type="submit" class="btn btn-success"><i class="fa-regular fa-floppy-disk"></i> Save</button>
+
     </form>
 @endsection
