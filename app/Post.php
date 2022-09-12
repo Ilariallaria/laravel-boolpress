@@ -9,7 +9,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'slug'
+        'slug',
+        'category_id'
     ];
 
     // metodo che applicato mi torna un elemento che appartiene alla tabella categories

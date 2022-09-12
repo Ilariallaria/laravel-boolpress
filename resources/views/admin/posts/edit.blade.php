@@ -14,6 +14,22 @@
         </div>
 
         <div class="mb-3">
+            <label for="category_id">Category</label>
+            <select class="form-select" id="category_id" name="category_id">
+                <option value="">not assigned</option>
+
+                @foreach ($categories as $category)
+                    <option
+                    {{-- il valore da prepopolare arriva dall'old se c'è un old, oppure dal database --}}
+                        value="{{ $category->id }}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : ''}}>
+                        {{ $category->name }}
+                    </option>
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="content" class="form-label">Content</label>
             <textarea class="form-control" id="content" name="content" rows="5">{{ old('content', $post->content) }}</textarea>
         </div>

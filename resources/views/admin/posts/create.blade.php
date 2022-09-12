@@ -24,6 +24,20 @@
         </div>
 
         <div class="mb-3">
+            <label for="category_id">Category</label>
+            <select class="form-select" id="category_id" name="category_id">
+                <option value="">not assigned</option>
+
+                @foreach ($categories as $category)
+                    <option
+                        value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="content" class="form-label">Content</label>
             <textarea class="form-control" id="content" name="content"
             placeholder="Write content here..." rows="5">{{ old('content') }}</textarea>
