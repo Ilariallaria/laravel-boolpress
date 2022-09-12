@@ -190,7 +190,10 @@ class PostController extends Controller
     protected function getValidationRules() {
         return [
             'title' => 'required|max:255',
-            'content' => 'required|max:60000'
+            'content' => 'required|max:60000',
+            // controlla che il valore che passiamo a category_id
+            // esista (e può essere anche null) nella tabella e nella colonna indicati
+            'category_id' => 'nullable:categories, id'
         ];
     }
 }
