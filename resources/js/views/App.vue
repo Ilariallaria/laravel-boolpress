@@ -1,3 +1,16 @@
 <template>
-    <h2>Sono stampato con Vue</h2>
+    <div>
+        <Posts/>
+    </div>
 </template>
+
+<script>
+import Posts from '../components/Posts.vue';
+
+export default {
+    name: 'App',
+    components: {
+        Posts
+    }
+}
+</script>

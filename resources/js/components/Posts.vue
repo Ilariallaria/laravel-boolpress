@@ -1,0 +1,80 @@
+<template>
+    <section>
+        <div class="container">
+            <h1>Our posts</h1>
+
+            <div class="row row-cols-3">
+                <div v-for="post in posts" :key="post.id" class="col">
+                    <div class="card mt-3">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">{{post.title}}</h5>
+                            <p class="card-text">{{truncateText(post.content)}}</p>
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="mt-3">
+                <ul class="pagination">
+                    <li class="page-item" :class="{'disabled': currentPaginationPage == 1}">
+                        <a class="page-link" @click="getPosts(currentPaginationPage -1)" href="#">Previous</a>
+                    </li>
+                    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                    <li class="page-item" :class="{'disabled': currentPaginationPage == lastPaginationpage}">
+                        <a class="page-link" @click="getPosts(currentPaginationPage + 1)" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </section>
+</template>
+
+<script>
+
+export default ({
+    name: 'Posts',
+    data() {
+        return{
+            posts: [],
+            currentPaginationPage: 1,
+            lastPaginationpage: null
+        };
+    },
+
+    methods: {
+
+        //funzione che tronca il testo 
+        truncateText(text){
+            // solo se supera i 100 caratteri 
+            if(text.length > 100){
+                return text.slice(0, 100) + '...';
+            }
+            return text;
+        },
+
+        // funzione che ci da tutti i post
+        getPosts(pageNumber){
+            axios.get('http://127.0.0.1:8000/api/posts', {
+                params: {
+                    page:pageNumber
+                }
+            })
+            .then((response) => {
+                this.posts = response.data.results.data;
+                this.currentPaginationPage = response.data.results.current_page;
+                this.lastPaginationpage = responce.data.results.last_page;
+            });
+
+        }
+    },
+
+    mounted(){
+        this.getPosts();
+    }
+})
+</script>
