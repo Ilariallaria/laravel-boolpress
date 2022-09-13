@@ -1,17 +1,8 @@
 <template>
     <div>
         <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+            <li v-for="link, index in navLinks" :key="index" class="nav-item">
+                <router-link :to="{name: link.name}" class="nav-link">{{link.label}}</router-link>
             </li>
         </ul>
     </div>
@@ -19,6 +10,24 @@
 
 <script>
 export default {
-    name: 'MyHeader'
+    name: 'MyHeader',
+    data() {
+        return{
+            navLinks:[
+                {
+                    name:'home',
+                    label: 'Home'
+                },
+                {
+                    name:'blog',
+                    label: 'Blog'
+                },
+                {
+                    name:'about',
+                    label: 'About us'
+                },
+            ],
+        };
+    },
 }
 </script>
