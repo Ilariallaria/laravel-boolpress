@@ -2316,7 +2316,9 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_vm.post ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.post.title))])]) : _vm._e()]);
+  }, [_vm.post ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _vm.post.category ? _c("div", {
+    staticClass: "mb-1"
+  }, [_vm._v("Category: " + _vm._s(_vm.post.category.name))]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.post.content))])]) : _vm._e()]);
 };
 
 var staticRenderFns = [];
