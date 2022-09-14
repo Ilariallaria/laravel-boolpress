@@ -4,15 +4,8 @@
             <h1>Our posts</h1>
 
             <div class="row row-cols-3">
-                <div v-for="post in posts" :key="post.id" class="col">
-                    <div class="card mt-3">
-                        <!-- <img src="..." class="card-img-top" alt="..."> -->
-                        <div class="card-body">
-                            <h5 class="card-title">{{post.title}}</h5>
-                            <p class="card-text">{{truncateText(post.content)}}</p>
-                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                        </div>
-                    </div>
+                <div v-for="singlepost in posts" :key="singlepost.id" class="col">
+                    <PostCard :post="singlepost" />
                 </div>
             </div>
 
@@ -35,9 +28,13 @@
 </template>
 
 <script>
+import PostCard from './PostCard.vue'
 
 export default ({
     name: 'Posts',
+    components: {
+        PostCard
+    },
     data() {
         return{
             posts: [],
@@ -47,15 +44,6 @@ export default ({
     },
 
     methods: {
-
-        //funzione che tronca il testo 
-        truncateText(text){
-            // solo se supera i 100 caratteri 
-            if(text.length > 100){
-                return text.slice(0, 100) + '...';
-            }
-            return text;
-        },
 
         // funzione che ci da tutti i post
         getPosts(pageNumber){
