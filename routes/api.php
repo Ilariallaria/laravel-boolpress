@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/posts', 'Api\PostController@index');
+
+// chiamiamo la funzione show appena creata
+Route::get('/posts/{slug}', 'Api\PostController@show');
+ 
