@@ -3,6 +3,8 @@
         <div v-if="post">
             <h1>{{post.title}}</h1>
 
+            <img v-if="post.cover" :src="post.cover" class="w-50 " :alt="post.title">
+
             <div v-if="post.category" class="mb-1">Category: {{post.category.name}}</div>
 
             <p>{{post.content}}</p>
