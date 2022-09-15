@@ -2088,7 +2088,16 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/api/posts/' + this.$route.params.slug).then(function (response) {
-      _this.post = response.data.results;
+      // se trova il post
+      if (response.data.results) {
+        // lo stampa
+        _this.post = response.data.results;
+      } else {
+        // altrimenti, mi porta alla 404 tramite router.push()
+        _this.$router.push({
+          name: 'not-found'
+        });
+      }
     });
   }
 });

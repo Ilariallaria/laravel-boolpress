@@ -10,7 +10,8 @@ class Post extends Model
         'title',
         'content',
         'slug',
-        'category_id'
+        'category_id',
+        'cover'
     ];
 
     // metodo che applicato mi torna un elemento che appartiene alla tabella categories

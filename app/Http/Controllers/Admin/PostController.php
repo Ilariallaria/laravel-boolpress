@@ -8,6 +8,7 @@ use App\Post;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Category;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -58,6 +59,13 @@ class PostController extends Controller
         $request->validate($this->getValidationRules());
 
         $form_data = $request->all();
+
+        if(isset($form_data['image'])){
+            $img_path = Storage::put('post-covers', $form_data['image']);
+            $form_data['cover'] = $img_path;
+            
+        }
+
 
         $new_post = new Post();
         $new_post->fill($form_data);
@@ -126,8 +134,17 @@ class PostController extends Controller
         //ottengo i dati dal form compilato dall'utente
         $form_data = $request->all();
 
-        // otengo il post da modificare con il Model
+        // ottengo il post da modificare con il Model
         $post_to_update = Post::findOrFail($id);
+
+        if(isset($form_data['image'])){
+            if($post_to_update->cover){
+                Storage::delete($post_to_update->cover);
+            }
+            $img_path = Storage::put('post-covers', $form_data['image']);
+            $form_data['cover'] = $img_path;
+
+        }
 
         //aggiungo lo slug all'array form_data 
         if($form_data['title'] !== $post_to_update->title) {
@@ -155,6 +172,11 @@ class PostController extends Controller
     {
         // qui ho a disposizione il post appena 'cancellato', lo prendo con il model
         $post_to_delete = Post::findOrFail($id);
+
+        if($post_to_delete->cover) {
+            Storage::delete($post_to_delete->cover);
+        }
+
         // e lo elimino con delete
         $post_to_delete->delete();
 
@@ -193,7 +215,8 @@ class PostController extends Controller
             'content' => 'required|max:60000',
             // controlla che il valore che passiamo a category_id
             // esista (e può essere anche null) nella tabella e nella colonna indicati
-            'category_id' => 'nullable:categories, id'
+            'category_id' => 'nullable:categories, id',
+            'image' => 'image|max:1024|nullable'
         ];
     }
 }

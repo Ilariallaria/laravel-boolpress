@@ -1,6 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+    @if ($post->cover)
+    <img class="w-50" src="{{asset('storage/' . $post->cover)}}" alt="{{$post->title}}">
+    @endif
+
     <h1>{{ $post->title }}</h1>
 
     <a href="{{ route('admin.posts.index') }}" class="btn btn-primary">&#8592</a>

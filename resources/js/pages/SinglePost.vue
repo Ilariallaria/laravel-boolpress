@@ -23,7 +23,15 @@ export default {
     mounted(){
         axios.get('/api/posts/' + this.$route.params.slug)
         .then((response) => {
-            this.post = response.data.results;
+            // se trova il post
+            if(response.data.results){
+                // lo stampa
+                this.post = response.data.results;
+            } else{
+                // altrimenti, mi porta alla 404 tramite router.push()
+                this.$router.push({name: 'not-found'});
+            }
+
         });
     }
 }

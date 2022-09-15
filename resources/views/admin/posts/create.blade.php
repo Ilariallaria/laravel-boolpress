@@ -13,7 +13,7 @@
         </div>
     @endif
         {{-- deve inviare i dati a store con metodo post --}}
-    <form action="{{ route('admin.posts.store') }}" method="post">
+    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
 
@@ -41,6 +41,11 @@
             <label for="content" class="form-label">Content</label>
             <textarea class="form-control" id="content" name="content"
             placeholder="Write content here..." rows="5">{{ old('content') }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input class="form-control" type="file" id="image" name="image">
         </div>
 
         {{-- <input type="submit" class="btn btn-success" value="Save"> --}}
