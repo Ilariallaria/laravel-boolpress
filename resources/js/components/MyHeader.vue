@@ -26,6 +26,10 @@ export default {
                     name:'about',
                     label: 'About us'
                 },
+                {
+                    name:'contact',
+                    label: 'Contact us'
+                },
             ],
         };
     },

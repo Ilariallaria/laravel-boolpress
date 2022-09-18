@@ -22,4 +22,6 @@ Route::get('/posts', 'Api\PostController@index');
 
 // chiamiamo la funzione show appena creata
 Route::get('/posts/{slug}', 'Api\PostController@show');
+
+Route::post('/leads', 'Api\LeadController@store');
  

@@ -9,6 +9,9 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewPostAdminEmail;
+
 
 class PostController extends Controller
 {
@@ -73,6 +76,10 @@ class PostController extends Controller
         $new_post->slug = $this->getFreeSlugFromTitle($new_post->title);
 
         $new_post->save();
+
+        // usiamo il gestore della mail per mandare mail di avviso creazione nuovo post
+        // passandogli l'istanza della classe mail che abbiamo creato
+        Mail::to('admin@boolpress.com')->send(new NewPostAdminEmail($new_post));
 
         return redirect()->route('admin.posts.show', ['post' => $new_post->id]);
     }
