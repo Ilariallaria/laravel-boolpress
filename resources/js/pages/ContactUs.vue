@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" :disabled="sending" >Submit</button>
 
         </form>
 
@@ -58,11 +58,15 @@ export default {
             // aggiungo success ai data con def false
             success: false,
             // oggetto vuoto dove si salveranno gli errori
-            errors: {}
+            errors: {},
+            sending: false
         };
     },
     methods: {
         sendMessage(){
+
+            this.sending = true;
+
             axios.post('/api/leads', {
                 name: this.userName,
                 email: this.userEmail,
@@ -78,10 +82,13 @@ export default {
                     this.userName ='';
                     this.userEmail ='';
                     this.userMessage ='';
+                    this.errors = {};
                 } else {
                     // altrimenti, salva gli errori errors{}
                     this.errors = response.data.errors;
-                }        
+                }
+                
+                this.sending = false;
             })
         }
     }

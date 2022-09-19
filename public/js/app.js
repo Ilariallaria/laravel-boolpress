@@ -2025,13 +2025,15 @@ __webpack_require__.r(__webpack_exports__);
       // aggiungo success ai data con def false
       success: false,
       // oggetto vuoto dove si salveranno gli errori
-      errors: {}
+      errors: {},
+      sending: false
     };
   },
   methods: {
     sendMessage: function sendMessage() {
       var _this = this;
 
+      this.sending = true;
       axios.post('/api/leads', {
         name: this.userName,
         email: this.userEmail,
@@ -2045,10 +2047,13 @@ __webpack_require__.r(__webpack_exports__);
           _this.userName = '';
           _this.userEmail = '';
           _this.userMessage = '';
+          _this.errors = {};
         } else {
           // altrimenti, salva gli errori errors{}
           _this.errors = response.data.errors;
         }
+
+        _this.sending = false;
       });
     }
   }
@@ -2479,7 +2484,8 @@ var render = function render() {
   }), 0) : _vm._e()]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
-      type: "submit"
+      type: "submit",
+      disabled: _vm.sending
     }
   }, [_vm._v("Submit")])])]);
 };
