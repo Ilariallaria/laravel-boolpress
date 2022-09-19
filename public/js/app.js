@@ -2021,17 +2021,34 @@ __webpack_require__.r(__webpack_exports__);
     return {
       userName: '',
       userEmail: '',
-      userMessage: ''
+      userMessage: '',
+      // aggiungo success ai data con def false
+      success: false,
+      // oggetto vuoto dove si salveranno gli errori
+      errors: {}
     };
   },
   methods: {
     sendMessage: function sendMessage() {
+      var _this = this;
+
       axios.post('/api/leads', {
         name: this.userName,
         email: this.userEmail,
         message: this.userMessage
       }).then(function (response) {
-        console.log(response);
+        // gli dico che se dalla chiamata api, questo success torna true
+        if (response.data.success) {
+          // anche questo success diventa true,
+          // si verifica quindi la condizione per stampare l'altert in pagina
+          _this.success = true;
+          _this.userName = '';
+          _this.userEmail = '';
+          _this.userMessage = '';
+        } else {
+          // altrimenti, salva gli errori errors{}
+          _this.errors = response.data.errors;
+        }
       });
     }
   }
@@ -2336,7 +2353,12 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Contact us")]), _vm._v(" "), _c("form", {
+  }, [_c("h1", [_vm._v("Contact us")]), _vm._v(" "), _vm.success ? _c("div", {
+    staticClass: "alert alert-primary",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n        Thank's for contacting us\n    ")]) : _vm._e(), _vm._v(" "), _c("form", {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -2372,7 +2394,15 @@ var render = function render() {
         _vm.userName = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.errors.name ? _c("div", _vm._l(_vm.errors.name, function (error, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "alert alert-danger",
+      attrs: {
+        role: "alert"
+      }
+    }, [_vm._v("\n                    " + _vm._s(error) + "\n                ")]);
+  }), 0) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label",
@@ -2401,7 +2431,15 @@ var render = function render() {
         _vm.userEmail = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.errors.email ? _c("div", _vm._l(_vm.errors.email, function (error, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "alert alert-danger",
+      attrs: {
+        role: "alert"
+      }
+    }, [_vm._v("\n                    " + _vm._s(error) + "\n                ")]);
+  }), 0) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label",
@@ -2430,12 +2468,20 @@ var render = function render() {
         _vm.userMessage = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _vm.errors.message ? _c("div", _vm._l(_vm.errors.message, function (error, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "alert alert-danger",
+      attrs: {
+        role: "alert"
+      }
+    }, [_vm._v("\n                    " + _vm._s(error) + "\n                ")]);
+  }), 0) : _vm._e()]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "submit"
     }
-  })])]);
+  }, [_vm._v("Submit")])])]);
 };
 
 var staticRenderFns = [];
